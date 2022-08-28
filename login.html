@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="form.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+</head>
+<body>
+    <input type="button" id="btn" value="Change color">
+    <div class="login">
+        <h1>Login</h1>
+        <form autocomplete="on">
+            <div class=""> 
+                Email<input type="email" id="e">
+                <i class="fa-solid "></i>
+                <span></span><br>
+            </div>
+            <div class="">
+                Password<input type="password" id="p">
+                <i class="fa-solid "></i>
+                <span></span><br>
+            </div>
+            <div class="">
+                Confirm Password<input type="password" id="c">
+                <i class="fa-solid "></i>
+                <span></span><br>
+            </div>
+            <input class="bttn" type="submit" value="Submit">
+        </form>
+    </div>
+    <p class="p2">Not have an account <a class="button1" href="form.html"> Sign Up here</a></p>
+    <script type="module">
+        import {setError,setSuccess,isEmail,validatePassword} from "./demo.js"
+        const form=document.querySelector("form")
+        const email=document.getElementById("e")
+        const password=document.getElementById("p")
+        const conPassword=document.getElementById("c")
+        form.addEventListener("click",function(evet){
+            event.preventDefault();
+            checkdata();
+        })
+        function checkdata(){
+            if((email.value).trim()===""){
+                setError(email,"\nEmail cann't be blank")
+            }
+            else if(!isEmail((email.value.trim()))){
+                setError(email,"\nEmail is Invailid")
+            }
+            else{
+                setSuccess(email)
+            }
+            if((password.value.trim())==""){
+                setError(password,"\nPassword cann't be blank")
+            }
+            else if(!validatePassword((password.value).trim())){
+                setError(password,"\nPlease enter the Strong Password")
+            }
+            else{
+                setSuccess(password)
+            }
+            if(((conPassword.value).trim())==""){
+                setError(conPassword,"\nPassword cann't be blank")
+            }
+            else if((password.value).trim()!=(conPassword.value).trim()){
+                setError(conPassword,"\nPassword does not match")
+            }
+            else{
+                setSuccess(conPassword)
+            }
+        }
+       let color=["black","white","gray","darkblue","yellow","pink","skyblue"];
+       let btn=document.getElementById("btn")
+       btn.addEventListener("click",function(){
+            let randomcolor=color[Math.floor(Math.random()*color.length)]
+            document.body.style.background=randomcolor;
+       })
+    </script>
+</body>
+</html>
